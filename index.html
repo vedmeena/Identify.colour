@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Guess the Color</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 100px;
+    }
+    
+    h1 {
+      color: #333;
+    }
+    
+    #color-box {
+      width: 200px;
+      height: 200px;
+      margin: 0 auto;
+      border: 1px solid #333;
+    }
+    
+    #result {
+      margin-top: 20px;
+      font-weight: bold;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Guess the Color Game</h1>
+  <div id="color-box"></div>
+  <p>Enter the RGB value of the color:</p>
+  <input type="text" id="guess" placeholder="e.g., 255, 0, 0">
+  <button onclick="checkGuess()">Check</button>
+  <p id="result"></p>
+
+  <script>
+    // Generate a random RGB value
+    function generateColor() {
+      const red = Math.floor(Math.random() * 256);
+      const green = Math.floor(Math.random() * 256);
+      const blue = Math.floor(Math.random() * 256);
+      return `rgb(${red}, ${green}, ${blue})`;
+    }
+    
+    // Set the background color of the color box
+    const colorBox = document.getElementById('color-box');
+    colorBox.style.backgroundColor = generateColor();
+    
+    function checkGuess() {
+      const guess = document.getElementById('guess').value;
+      const result = document.getElementById('result');
+      
+      if (guess.toLowerCase() === colorBox.style.backgroundColor) {
+        result.textContent = "Congratulations! You guessed the correct color.";
+        result.style.color = "green";
+      } else {
+        result.textContent = "Sorry, wrong guess. Try again.";
+        result.style.color = "red";
+      }
+      
+      document.getElementById('guess').value = '';
+    }
+  </script>
+</body>
+</html>
